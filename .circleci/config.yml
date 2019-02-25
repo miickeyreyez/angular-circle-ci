@@ -32,17 +32,23 @@ jobs:
     steps:
       - checkout
       - *restore_cache
-      - run: npm run build
+      - run: |
+          npm run build
+          tar -czvf app.tar.gz dist/
+          touch myFile.txt
+          ls -la
       - persist_to_workspace:
           root: .
           paths:
             - dist
+            - app.tar.gz
+            - myFile.txt
   compress:
     <<: *docker_image
     steps:
       - checkout
       - attach_workspace:
-          at: workspace
+          at: .
       - run: ls -la
   print_dev_env:
     <<: *docker_image
