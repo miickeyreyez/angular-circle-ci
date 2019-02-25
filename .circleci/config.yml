@@ -1,5 +1,5 @@
 docker_image: &docker_image
-  working_directory: ~/repo
+  working_directory: ~/angular-circle-ci
   docker:
   - image: circleci/node:10.8.0
 
@@ -19,6 +19,7 @@ jobs:
     - checkout
     - *restore_cache
     - run: |
+        pwd
         npm install
         npm install npm
         npm install @angular/cli
@@ -33,6 +34,7 @@ jobs:
       - checkout
       - *restore_cache
       - run: |
+          pwd
           npm run build
           tar -czvf app.tar.gz dist/
           touch myFile.txt
@@ -49,7 +51,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: ls -la
+      - run: pwd && ls -la
   print_dev_env:
     <<: *docker_image
     steps:
