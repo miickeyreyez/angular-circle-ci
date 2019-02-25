@@ -1,5 +1,5 @@
 docker_image: &docker_image
-  working_directory: ~/wizerecruit-back
+  working_directory: ~/angular-circle-ci
   docker:
   - image: circleci/node:10.8.0
 
