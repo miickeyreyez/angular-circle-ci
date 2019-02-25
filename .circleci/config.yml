@@ -35,3 +35,74 @@ jobs:
 
       # run tests!
       - run: ls -la
+docker_image: &docker_image
+  working_directory: ~/repo
+  docker:
+  - image: circleci/node:10.8.0
+
+restore_cache:
+- &restore_cache
+  restore_cache:
+    keys:
+    - v1-dependencies-{{ checksum "package.json" }}
+    # fallback to using the latest cache if no exact match is found
+    - v1-dependencies-
+
+version: 2
+jobs:
+  setup:
+    <<: *docker_image
+    steps:
+    - checkout
+    - *restore_cache
+    - run: |
+        npm install
+        npm install npm
+        npm install @angular/cli
+        ls -la
+    - save_cache:
+        paths:
+        - node_modules
+        key: v1-dependencies-{{ checksum "package.json" }}
+  build:
+    <<: *docker_image
+    steps:
+      - checkout
+      - *restore_cache
+      - run: npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist
+  compress:
+    <<: *docker_image
+    steps:
+      - checkout
+      - attach_workspace:
+          at: workspace
+      - run: ls -la
+  print_dev_env:
+    <<: *docker_image
+    steps:
+      - checkout
+      - run: printenv |grep "ENV_VAR*"
+  print_prod_env:
+    <<: *docker_image
+    steps:
+      - checkout
+      - run: printenv |grep "ENV_VAR*"
+workflows:
+  version: 2
+  circleci_contexts_workspaces:
+    jobs:
+      - setup
+      - print_dev_env:
+          context: dev
+      - print_prod_env:
+          context: prod
+      - build:
+          requires:
+            - setup
+      - compress:
+          requires:
+            - build
