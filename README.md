@@ -1,27 +1,53 @@
-# AngularCircleCi
+# Contexts/Workspaces on CircleCi
+Circle Ci is a continuos deployment tool that help to test, build and deploy applications
+easier and quicker on multiple platforms.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.3.
+## config.yml
+For setting up a project with CircleCi is neccesary to create a configuration file: `config.yml` in the `.circleci` folder.
 
-## Development server
+## Version
+Circle Ci version
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Jobs
+## ******************************
+Independent environment that can execute steps or commands, like:
+- _Install_
+- _Execute_
+- _Build_
+- _Store cache_
+- _Restore cache_
 
-## Code scaffolding
+## Docker image
+Docker image used to create the container environment
+*_CircleCi has prebuilt images_
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Working directory
+Current directory where the steps will run
 
-## Build
+## Steps
+Commands that will be executed
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Checkout
+Checkout the code from current branch
 
-## Running unit tests
+## Run
+Execute a bash command
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Save_cache
+Store a dir or a file in the CircleCi storage
 
-## Running end-to-end tests
+## Restore_cache
+Restore cache with a cache key
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Workflows
+## ******************************
+Set the flow configuration to excecute the jobs, a job can be executed always or in a specific branch or tag also can can be executed sequentially or in parallel
 
-## Further help
+## Contexts
+## ******************************
+Are a mechanism for securing and sharing environment variables across projects
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Workspace
+## ******************************
+The workflow has an associated workspace which can be used to transfer files (_persist_to_workspace_/__) between jobs
+
