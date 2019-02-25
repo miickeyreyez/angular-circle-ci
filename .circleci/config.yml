@@ -35,10 +35,10 @@ jobs:
       - *restore_cache
       - run: |
           pwd
+          ls -la
           npm run build
           tar -czvf app.tar.gz dist/
           touch myFile.txt
-          ls -la
       - persist_to_workspace:
           root: .
           paths:
