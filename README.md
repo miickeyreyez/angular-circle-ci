@@ -19,7 +19,6 @@ Independent environment that can execute steps or commands, like:
 
 ## Docker image
 Docker image used to create the container environment
-*_CircleCi has prebuilt images_
 
 ## Working directory
 Current directory where the steps will run
@@ -41,7 +40,7 @@ Restore cache with a cache key
 
 ## Workflows
 ## ******************************
-Set the flow configuration to excecute the jobs, a job can be executed always or in a specific branch or tag also can can be executed sequentially or in parallel
+Set the flow configuration to excecute the jobs, a job can be executed always or in a specific branch or tag, also can can be executed sequentially or in parallel
 
 ## Contexts
 ## ******************************
@@ -49,5 +48,5 @@ Are a mechanism for securing and sharing environment variables across projects
 
 ## Workspace
 ## ******************************
-The workflow has an associated workspace which can be used to transfer files (_persist_to_workspace_/__) between jobs
+The workflow has an associated workspace which can be used to transfer files (_persist_to_workspace_/_attach_workspace_) between jobs
 
